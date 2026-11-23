@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Fichiers generes par les scripts HAProxy ###
+haproxy/haproxy.runtime.cfg
+haproxy/haproxy.cfg.bak
