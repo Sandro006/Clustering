@@ -1,0 +1,12 @@
+[mysqld]
+server-id=102
+port=3308
+bind-address=127.0.0.1
+skip-name-resolve
+mysqlx=OFF
+log-bin=binlog
+relay-log=relaylog
+gtid-mode=ON
+enforce-gtid-consistency=ON
+read-only=ON
+super-read-only=ON

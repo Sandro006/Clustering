@@ -40,7 +40,7 @@ Clustering/
 
 ## CONFIGURER HAPROXY DEPUIS LE NAVIGATEUR
 
-Une page d'administration est disponible sur **http://localhost:8080/config.html**
+Une page d'administration est disponible sur **http://localhost:8083/config.html**
 (elle est servie par les deux serveurs, donc accessible directement sur 8081 et 8082 aussi).
 
 Elle permet de :
@@ -78,7 +78,7 @@ HAProxy tourne dans WSL tandis que les serveurs Spring Boot tournent sur Windows
 La configuration utilise le mode **NAT** (`networkingMode=nat` dans `%USERPROFILE%\.wslconfig`)
 avec `localhostForwarding=true` :
 
-- depuis Windows : `http://localhost:8080` et `http://localhost:8404/stats` atteignent WSL ;
+- depuis Windows : `http://localhost:8083` et `http://localhost:8404/stats` atteignent WSL ;
 - depuis WSL : la passerelle par défaut (ex. `172.22.240.1`) est l'hôte Windows.
 
 `host.docker.internal` n'existe pas en mode NAT dans cette distro : les scripts

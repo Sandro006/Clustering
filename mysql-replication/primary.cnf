@@ -1,0 +1,10 @@
+[mysqld]
+server-id=101
+port=3307
+bind-address=127.0.0.1
+skip-name-resolve
+mysqlx=OFF
+log-bin=binlog
+binlog-format=ROW
+gtid-mode=ON
+enforce-gtid-consistency=ON

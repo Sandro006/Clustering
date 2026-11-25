@@ -22,6 +22,7 @@ function Get-JdkMajor {
 function Find-SuitableJdk {
     $roots = @(
         (Join-Path $env:ProgramFiles 'Java'),
+        (Join-Path $env:ProgramFiles 'Eclipse Adoptium'),
         (Join-Path ${env:ProgramFiles(x86)} 'Java'),
         (Join-Path $env:LOCALAPPDATA 'Programs\Eclipse Adoptium'),
         (Join-Path $env:USERPROFILE '.jdks')
@@ -59,12 +60,20 @@ if ($jdk) {
     Write-Output "ATTENTION : aucun JDK >= 17 trouve, Spring Boot 4 ne demarrera pas."
 }
 
+# Le mot de passe est genere dans WSL et ne figure pas dans le depot.
+$appPassword = (wsl -e bash -lc 'cat "$HOME/.local/share/clustering-mysql/app-password"' 2>$null | Out-String).Trim()
+if ($LASTEXITCODE -eq 0 -and $appPassword) {
+    $env:CLUSTERING_DB_PASSWORD = $appPassword
+} else {
+    Write-Output "Base MySQL non configuree : voir mysql-replication/README.md."
+}
+
 $logDir = Join-Path $env:TEMP 'opencode'
 New-Item -ItemType Directory -Force -Path $logDir | Out-Null
 
 $servers = @(
-    @{ Name = 'server1'; Dir = 'D:\alefas4\Clustering\Clustering\server1'; Port = 8081 },
-    @{ Name = 'server2'; Dir = 'D:\alefas4\Clustering\Clustering\server2'; Port = 8082 }
+    @{ Name = 'server1'; Dir = 'D:\Clone_github\Clustering\server1'; Port = 8081 },
+    @{ Name = 'server2'; Dir = 'D:\Clone_github\Clustering\server2'; Port = 8082 }
 )
 
 foreach ($s in $servers) {

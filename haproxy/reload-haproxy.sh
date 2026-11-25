@@ -2,8 +2,8 @@
 # Valide puis recharge HAProxy pour le test de clustering (a lancer depuis WSL).
 # N'affiche RELOAD_OK que si la configuration est valide ET que HAProxy a redemarre.
 # host.docker.internal est remplace par l'IP de l'hote Windows (route par defaut).
-CFG=/mnt/d/alefas4/Clustering/Clustering/haproxy/haproxy.cfg
-RUNTIME=/mnt/d/alefas4/Clustering/Clustering/haproxy/haproxy.runtime.cfg
+CFG=/mnt/d/Clone_github/Clustering/haproxy/haproxy.cfg
+RUNTIME=/mnt/d/Clone_github/Clustering/haproxy/haproxy.runtime.cfg
 
 HOST_IP=$(ip route show default | awk '/default/ {print $3}')
 if [ -z "$HOST_IP" ]; then

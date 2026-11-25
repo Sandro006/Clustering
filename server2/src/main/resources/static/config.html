@@ -185,7 +185,7 @@
             <div class="grid">
                 <div>
                     <label for="frontPort">Port frontend (entrée clients)</label>
-                    <input type="number" id="frontPort" value="8080" min="1" max="65535">
+                    <input type="number" id="frontPort" value="8083" min="1" max="65535">
                 </div>
                 <div>
                     <label for="balance">Algorithme d'équilibrage</label>
@@ -305,7 +305,7 @@
         }
 
         function generateConfig() {
-            const frontPort = val('frontPort', '8080');
+            const frontPort = val('frontPort', '8083');
             const statsPort = val('statsPort', '8404');
             const balance = val('balance', 'roundrobin');
             const s1 = val('server1', 'host.docker.internal:8081');

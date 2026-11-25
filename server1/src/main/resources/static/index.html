@@ -10,6 +10,53 @@
         <p>Je suis l'instance Spring Boot numéro 1.</p>
         <p>Port : 8081</p>
         <p><a href="/config.html">Configurer HAProxy</a> · <a href="http://localhost:8404/stats">Statistiques</a></p>
-    </body>
+        <section>
+        <h2>Messages</h2>
+        <form id="message-form">
+            <label for="message">Votre message</label><br>
+            <textarea id="message" name="message" maxlength="500" rows="3" required></textarea><br>
+            <button type="submit">Envoyer</button>
+        </form>
+        <p id="message-status" role="status" aria-live="polite"></p>
+        <h3>Messages enregistrés</h3>
+        <ul id="messages"></ul>
+    </section>
+    <script>
+        const form = document.getElementById('message-form');
+        const status = document.getElementById('message-status');
+        const list = document.getElementById('messages');
+        async function refreshMessages() {
+            const response = await fetch('/api/messages');
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || 'Chargement impossible.');
+            list.replaceChildren();
+            data.forEach(message => {
+                const item = document.createElement('li');
+                item.textContent = message.content;
+                list.appendChild(item);
+            });
+        }
+        form.addEventListener('submit', async event => {
+            event.preventDefault();
+            const button = form.querySelector('button');
+            button.disabled = true;
+            status.textContent = 'Enregistrement...';
+            try {
+                const response = await fetch('/api/messages', {
+                    method: 'POST', headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({content: document.getElementById('message').value})
+                });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.error || 'Enregistrement impossible.');
+                form.reset();
+                status.textContent = 'Message enregistré.';
+                await refreshMessages();
+            } catch (error) { status.textContent = error.message; }
+            finally { button.disabled = false; }
+        });
+        refreshMessages().catch(error => { status.textContent = error.message; });
+        setInterval(() => refreshMessages().catch(() => {}), 3000);
+    </script>
+</body>
 
 </html>

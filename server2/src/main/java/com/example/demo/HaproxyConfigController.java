@@ -30,10 +30,10 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*")
 public class HaproxyConfigController {
 
-    @Value("${haproxy.config.path:D:/alefas4/Clustering/Clustering/haproxy/haproxy.cfg}")
+    @Value("${haproxy.config.path:D:/Clone_github/Clustering/haproxy/haproxy.cfg}")
     private String configPath;
 
-    @Value("${haproxy.reload.script:/mnt/d/alefas4/Clustering/Clustering/haproxy/reload-haproxy.sh}")
+    @Value("${haproxy.reload.script:/mnt/d/Clone_github/Clustering/haproxy/reload-haproxy.sh}")
     private String reloadScript;
 
     @Value("${server.port}")
